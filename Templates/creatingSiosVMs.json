@@ -70,11 +70,6 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), '0')]",
       "location": "[parameters('location')]",
-      "plan": {
-        "name": "bring_your_own_license",
-        "publisher": "sios_datakeeper",
-        "product": "sios-datakeeper-8"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('siosVMSize')]"
@@ -169,11 +164,6 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), '1')]",
       "location": "[parameters('location')]",
-      "plan": {
-        "name": "bring_your_own_license",
-        "publisher": "sios_datakeeper",
-        "product": "sios-datakeeper-8"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('siosVMSize')]"
@@ -268,11 +258,6 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), 'client')]",
       "location": "[parameters('location')]",
-      "plan": {
-        "name": "bring_your_own_license",
-        "publisher": "sios_datakeeper",
-        "product": "sios-datakeeper-8"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('siosVMSize')]"
@@ -287,10 +272,7 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "sios_datakeeper",
-            "offer": "sios-datakeeper-8",
-            "sku": "bring_your_own_license",
-            "version": "latest"
+            "id": "/subscriptions/1e3aa8ec-3026-406f-a296-fa022343afad/resourceGroups/AzurePublishing/providers/Microsoft.Compute/galleries/DKCE_Marketplace_Images/images/SDKE-Windows-Server-2012R2/versions/8.9.1"
           },
           "osDisk": {
             "name": "osdisk",
