@@ -91,14 +91,6 @@
           "imageReference": {
             "id": "/subscriptions/1e3aa8ec-3026-406f-a296-fa022343afad/resourceGroups/AzurePublishing/providers/Microsoft.Compute/galleries/DKCE_Marketplace_Images/images/SDKE-Windows-Server-2012R2/versions/8.9.1"
           },
-          "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'1.blob.core.windows.net/',parameters('vmContainerName'),'/',variables('siosVMNamePrefix'), '0', '-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          },
           "dataDisks": [
             {
               "vhd": {
@@ -187,14 +179,6 @@
           "imageReference": {
             "id": "/subscriptions/1e3aa8ec-3026-406f-a296-fa022343afad/resourceGroups/AzurePublishing/providers/Microsoft.Compute/galleries/DKCE_Marketplace_Images/images/SDKE-Windows-Server-2012R2/versions/8.9.1"
           },
-          "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'1.blob.core.windows.net/',parameters('vmContainerName'),'/',variables('siosVMNamePrefix'), '1', '-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          },
           "dataDisks": [
             {
               "vhd": {
@@ -282,14 +266,6 @@
         "storageProfile": {
           "imageReference": {
             "id": "/subscriptions/1e3aa8ec-3026-406f-a296-fa022343afad/resourceGroups/AzurePublishing/providers/Microsoft.Compute/galleries/DKCE_Marketplace_Images/images/SDKE-Windows-Server-2012R2/versions/8.9.1"
-          },
-          "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'clnt.blob.core.windows.net/',parameters('vmContainerName'),'/client', '-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
           },
           "dataDisks": [ ]
         },
