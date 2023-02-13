@@ -66,7 +66,7 @@
   },
   "resources": [
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2022-05-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), '0')]",
       "location": "[parameters('location')]",
@@ -218,7 +218,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2022-05-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), 'client')]",
       "location": "[parameters('location')]",
@@ -241,8 +241,8 @@
         },
         "storageProfile": {
           "imageReference": {
-              "id": "/subscriptions/1e3aa8ec-3026-406f-a296-fa022343afad/resourceGroups/AzurePublishing/providers/Microsoft.Compute/galleries/DKCE_Marketplace_Images/images/SDKE-Windows-Server-2012R2/versions/8.9.1",
-            }
+            "id": "/subscriptions/1e3aa8ec-3026-406f-a296-fa022343afad/resourceGroups/AzurePublishing/providers/Microsoft.Compute/galleries/DKCE_Marketplace_Images/images/SDKE-Windows-Server-2012R2/versions/8.9.1"
+          }
         },
         "networkProfile": {
           "networkInterfaces": [
