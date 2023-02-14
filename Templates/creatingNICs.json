@@ -8,16 +8,13 @@
     "adPDCNicName": {
       "type": "string"
     },
-    "adPDCNICIPAddress": {
-      "type": "string"
-    },
-    "staticSubnetRef": {
-      "type": "string"
-    },
     "siosVMNamePrefix": {
       "type": "string"
     },
     "pdcRdpIPAddressName": {
+      "type": "string"
+    },
+    "staticSubnetRef": {
       "type": "string"
     },
     "siosVMRdpIPAddressNamePrefix": {
@@ -25,10 +22,39 @@
     },
     "ilbBEAddressPoolID": {
       "type": "string"
+    },
+    "securityType": {
+      "type": "string",
+      "defaultValue": "TrustedLaunch",
+      "allowedValues": [
+        "Standard",
+        "TrustedLaunch"
+      ],
+      "metadata": {
+        "description": "Security Type of the Virtual Machine."
+      }
     }
   },
   "variables": {
-    "siosVMNamePrefix": "[concat(parameters('siosVMNamePrefix'), '-')]"
+    "siosVMNamePrefix": "[concat(parameters('siosVMNamePrefix'), '-')]",
+    "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
+    "nicName": "SiosDK-NIC",
+    "addressPrefix": "10.0.0.0/16",
+    "subnetPrefix": "10.0.0.0/24",
+    "virtualNetworkName": "MyVNET",
+    "networkSecurityGroupName": "SiosDK-SG",
+    "securityProfileJson": {
+      "uefiSettings": {
+        "secureBootEnabled": true,
+        "vTpmEnabled": true
+      },
+      "securityType": "[parameters('securityType')]"
+    },
+    "extensionName": "GuestAttestation",
+    "extensionPublisher": "Microsoft.Azure.Security.WindowsAttestation",
+    "extensionVersion": "1.0",
+    "maaTenantName": "GuestAttestation",
+    "maaEndpoint": "[substring('emptyString', 0, 0)]"
   },
   "resources": [
     {
@@ -57,60 +83,75 @@
       }
     },
     {
-      "name": "[parameters('adPDCNicName')]",
-      "type": "Microsoft.Network/networkInterfaces",
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2022-05-01",
+      "name": "[variables('virtualNetworkName')]",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "parameters('staticSubnetRef')]",
+            "properties": {
+              "addressPrefix": "[variables('subnetPrefix')]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+              }
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2022-05-01",
+      "name": "[parameters('adPDCNicName')]",
+      "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('adPDCNICIPAddress')]",
+              "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('pdcRdpIPAddressName'))]"
               },
               "subnet": {
-                "id": "[parameters('staticSubnetRef')]"
-              },
-              "applicationSecurityGroups": [
-                {
-                  "id": "[concat(parameters('adPDCNicName'), '_sg')]"
-                }
-              ]
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), parameters('staticSubnetRef'))]"
+              }
             }
           }
         ]
       }
     },
     {
-      "name": "[concat(variables('siosVMNamePrefix'), '0-nic')]",
       "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2022-05-01",
+      "name": "[concat(variables('siosVMNamePrefix'), '0-nic')]",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "10.0.0.5",
+              "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(parameters('siosVMRdpIPAddressNamePrefix'), '0RdpIP'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('pdcRdpIPAddressName'))]"
               },
               "subnet": {
-                "id": "[parameters('staticSubnetRef')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), parameters('staticSubnetRef'))]"
               },
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[parameters('ilbBEAddressPoolID')]"
                 }
-              ],
-              "applicationSecurityGroups": [
-                {
-                  "id": "[concat(parameters('adPDCNicName'), '_sg')]"
-                }
               ]
             }
           }
@@ -118,22 +159,21 @@
       }
     },
     {
-      "name": "[concat(variables('siosVMNamePrefix'), '1-nic')]",
       "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2022-05-01",
+      "name": "[concat(variables('siosVMNamePrefix'), '1-nic')]",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "10.0.0.6",
+              "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(parameters('siosVMRdpIPAddressNamePrefix'), '1RdpIP'))]"
               },
               "subnet": {
-                "id": "[parameters('staticSubnetRef')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), parameters('staticSubnetRef'))]"
               },
               "loadBalancerBackendAddressPools": [
                 {
@@ -146,22 +186,21 @@
       }
     },
     {
-      "name": "sios-client-nic",
       "type": "Microsoft.Network/networkInterfaces",
+      "name": "sios-client-nic",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2022-05-01",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "10.0.0.7",
+              "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(parameters('siosVMRdpIPAddressNamePrefix'), 'clientRdpIP'))]"
               },
               "subnet": {
-                "id": "[parameters('staticSubnetRef')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), parameters('staticSubnetRef'))]"
               }
             }
           }
