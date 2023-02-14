@@ -32,6 +32,31 @@
   },
   "resources": [
     {
+      "apiVersion": "2019-02-01",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "[concat(parameters('adPDCNicName'), '_sg')]",
+      "location": "[parameters('location')]",
+      "tags": {},
+      "properties": {
+        "securityRules": [
+          {
+            "name": "ALL",
+            "properties": {
+              "description": "Allows ALL traffic",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "[parameters('adPDCNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
