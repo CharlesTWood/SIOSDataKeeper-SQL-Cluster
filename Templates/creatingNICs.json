@@ -73,7 +73,12 @@
               },
               "subnet": {
                 "id": "[parameters('staticSubnetRef')]"
-              }
+              },
+              "applicationSecurityGroups": [
+                {
+                  "id": "[concat(parameters('adPDCNicName'), '_sg')]"
+                }
+              ]
             }
           }
         ]
@@ -100,6 +105,11 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[parameters('ilbBEAddressPoolID')]"
+                }
+              ],
+              "applicationSecurityGroups": [
+                {
+                  "id": "[concat(parameters('adPDCNicName'), '_sg')]"
                 }
               ]
             }
