@@ -25,11 +25,11 @@ This template is mostly deployed in a serial manner, and uses PowerShell DSC Ext
 
 + 	The images used to create this deployment are:
 	+ 	AD VM - Latest Windows Server 2012 R2 Image
-	+ 	SIOS DataKeeper / SQL Server VMs - DataKeeper 8.3.0 marketplace image (requires license), which is based on the latest Windows Server 2012 R2 Image,  with SQL 2014 SP1 180 day evaluation version 
+	+ 	SIOS DataKeeper / SQL Server VMs - DataKeeper 8.9.1 marketplace image (requires license), which is based on the latest Windows Server 2012 R2 Image,  with SQL 2014 SP1 180 day evaluation version 
 	+ 	Client - Latest Windows Server 2012 R2 Image  
 	
 # Click the button below to deploy a<br/>SIOS DataKeeper / SQL 2014 Failover Cluster in the Azure Portal
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FSIOSDataKeeper%2FSIOSDataKeeper-SQL-Cluster%2Fmaster%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharlesTWood%2FSIOSDataKeeper-SQL-Cluster%2FDKCEv891%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
