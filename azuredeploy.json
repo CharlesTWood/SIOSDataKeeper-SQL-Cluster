@@ -326,6 +326,9 @@
           "adPDCNicName": {
             "value": "[variables('adPDCNicName')]"
           },
+          "adPDCNICIPAddress": {
+            "value": "[variables('adPDCNICIPAddress')]"
+          },
           "staticSubnetRef": {
             "value": "[variables('staticSubnetRef')]"
           },
