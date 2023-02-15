@@ -263,8 +263,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/SettingUpRdp",
-        "Microsoft.Resources/deployments/CreatingVirtualNetwork"
+        "Microsoft.Resources/deployments/SettingUpRdp"
       ],
       "properties": {
         "mode": "Incremental",
@@ -311,7 +310,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/CreatingVirtualNetwork",
         "Microsoft.Resources/deployments/SettingUpRdp",
         "Microsoft.Resources/deployments/SettingUpLoadBalancers"
       ],
