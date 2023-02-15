@@ -29,7 +29,7 @@ This template is mostly deployed in a serial manner, and uses PowerShell DSC Ext
 	+ 	Client - Latest Windows Server 2012 R2 Image  
 	
 # Click the button below to deploy a<br/>SIOS DataKeeper / SQL 2014 Failover Cluster in the Azure Portal
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharlesTWood%2FSIOSDataKeeper-SQL-Cluster%2FDKCEv891%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharlesTWood%2FSIOSDataKeeper-SQL-Cluster%2FDKCE891%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
