@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "licenseKeyFtpURL": {
@@ -181,6 +181,7 @@
       "adPDCConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
       "rdpIPAdressSetupURL": "[concat(variables('baseUrl'),'/Templates/creatingPublicIP-RDP.json')]",
       "availabilitySetSetupURL": "[concat(variables('baseUrl'),'/Templates/creatingAvailabilitySets.json')]",
+      "netSecSetupURL": "[concat(variables('baseUrl'),'/Templates/creatingNetSecGroup.json')]",
       "provisioningPrimaryDCURL": "[concat(variables('baseUrl'),'/Templates/provisioningPrimaryDomainController.json')]",
       "creatingStorageAccounts": "[concat(variables('baseUrl'),'/Templates/creatingStorageAccounts.json')]",
       "creatingSiosVMsURL": "[concat(variables('baseUrl'),'/Templates/creatingSiosVMs.json')]",
@@ -193,6 +194,7 @@
       "prepareDataKeeperNodesCommandStr": "ConfigureSiosVM.ps1\\ConfigureSiosVM",
       "prepareClientVMModuleURL": "[concat(variables('baseUrl'),'/DSC/ConfigureSiosClientVM.ps1.zip')]",
       "prepareClientVMCommandStr": "ConfigureSiosClientVM.ps1\\ConfigureSiosClientVM"
+
     }
   },
   "resources": [
