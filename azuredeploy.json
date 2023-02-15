@@ -34,7 +34,7 @@
         "description": "The domain name in FQDN form. This value should contain at least two parts, separated by a '.' (for example, datakeeper.local). The first part of the FQDN will be used as the login domain name (for example, login as datakeeper&#92;siosadmin), and must not match the DOMAINADMINUSERNAME. If DOMAINNAME does not contain a '.', the suffix '.local' will be appended."
       }
     },
-    "domainAdminUsername": {     
+    "domainAdminUsername": {
       "type": "string",
       "defaultValue": "siosadmin",
       "metadata": {
@@ -54,6 +54,9 @@
       "metadata": {
         "description": "Name prefix for all of the DataKeeper / SQL VMs."
       }
+    },
+    "location": {
+      "type": "string"
     },
     "aDVMSize": {
       "type": "string",
@@ -117,13 +120,14 @@
     }
   },
   "variables": {
+    "networkSecurityGroupName": "SiosDK-SG",
     "location": "[resourceGroup().location]",
     "pdcRdpIPAddressName": "pdcRdpIP",
     "siosVMRdpIPAddressNamePrefix": "sios",
     "virtualNetworkAddressRange": "10.0.0.0/16",
     "staticSubnet": "10.0.0.0/24",
     "adPDCNICIPAddress": "10.0.0.4",
-    "baseUrl": "https://raw.githubusercontent.com/SIOSDataKeeper/SIOSDataKeeper-SQL-Cluster/master",
+    "baseUrl": "https://raw.githubusercontent.com/CharlesTWood/SIOSDataKeeper-SQL-Cluster/DKCEv891",
     "subnetNames": {
       "staticSubnetName": "staticSubnet"
     },
@@ -189,6 +193,29 @@
     }
   },
   "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2022-05-01",
+      "name": "[variables('networkSecurityGroupName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "ALL",
+            "properties": {
+              "priority": 100,
+              "access": "Allow",
+              "direction": "*",
+              "destinationPortRange": "*",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*"
+            }
+          }
+        ]
+      }
+    },
     {
       "name": "CreatingStorageAccounts",
       "type": "Microsoft.Resources/deployments",
@@ -267,6 +294,9 @@
         "templateLink": {
           "uri": "[variables('configuration').vnetSetupURL]",
           "contentVersion": "1.0.0.0"
+        },
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
         },
         "parameters": {
           "location": {
@@ -538,7 +568,7 @@
           },
           "prepareDataKeeperHeadNodeCommandStr": {
             "value": "[variables('configuration').prepareDataKeeperHeadNodeCommandStr]"
-          }, 
+          },
           "prepareDataKeeperNodesModuleURL": {
             "value": "[variables('configuration').prepareDataKeeperNodesModuleURL]"
           },
