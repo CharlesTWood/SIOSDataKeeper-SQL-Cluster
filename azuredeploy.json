@@ -168,7 +168,10 @@
       {
         "name": "[variables('subnetNames').staticSubnetName]",
         "properties": {
-          "addressPrefix": "[variables('staticSubnet')]"
+          "addressPrefix": "[variables('staticSubnet')]",
+          "networkSecurityGroup": {
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+          }
         }
       }
     ],
@@ -294,9 +297,6 @@
         "templateLink": {
           "uri": "[variables('configuration').vnetSetupURL]",
           "contentVersion": "1.0.0.0"
-        },
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
         },
         "parameters": {
           "location": {
