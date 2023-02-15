@@ -266,9 +266,32 @@
       }
     },
     {
+      "name": "CreatingNetworkSecurityGroup",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-05-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('configuration').netSecSetupURL]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[variables('location')]"
+          },
+          "networkSecurityGroupName": {
+            "value": "[variables('networkSecurityGroupName')]"
+          }
+        }
+      }
+    },
+    {
       "name": "CreatingVirtualNetwork",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-05-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/CreatingNetworkSecurityGroup"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
