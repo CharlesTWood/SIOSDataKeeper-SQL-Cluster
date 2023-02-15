@@ -124,7 +124,7 @@
     "virtualNetworkAddressRange": "10.0.0.0/16",
     "staticSubnet": "10.0.0.0/24",
     "adPDCNICIPAddress": "10.0.0.4",
-    "baseUrl": "https://raw.githubusercontent.com/CharlesTWood/SIOSDataKeeper-SQL-Cluster/DKCEv891",
+    "baseUrl": "https://raw.githubusercontent.com/CharlesTWood/SIOSDataKeeper-SQL-Cluster/DKCE891",
     "subnetNames": {
       "staticSubnetName": "staticSubnet"
     },
