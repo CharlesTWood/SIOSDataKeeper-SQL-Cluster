@@ -197,29 +197,6 @@
   },
   "resources": [
     {
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "2019-02-01",
-      "name": "[variables('networkSecurityGroupName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "securityRules": [
-          {
-            "name": "ALL",
-            "properties": {
-              "priority": 100,
-              "access": "Allow",
-              "direction": "*",
-              "destinationPortRange": "*",
-              "protocol": "Tcp",
-              "sourcePortRange": "*",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*"
-            }
-          }
-        ]
-      }
-    },
-    {
       "name": "CreatingStorageAccounts",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
@@ -310,6 +287,9 @@
           },
           "subnets": {
             "value": "[variables('subnets')]"
+          },
+          "networkSecurityGroupName": {
+            "value": "[variables('networkSecurityGroupName')]"
           }
         }
       }
