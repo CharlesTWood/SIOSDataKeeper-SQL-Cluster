@@ -55,9 +55,6 @@
         "description": "Name prefix for all of the DataKeeper / SQL VMs."
       }
     },
-    "location": {
-      "type": "string"
-    },
     "aDVMSize": {
       "type": "string",
       "defaultValue": "Standard_DS1",
