@@ -41,7 +41,7 @@
   "variables": {
     "siosVMNamePrefix": "[concat(parameters('siosVMNamePrefix'), '-')]",
     "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
-    "nicName": "SiosDK-NIC",
+    "nicName": "Sios-NIC",
     "addressPrefix": "10.0.0.0/16",
     "subnetPrefix": "10.0.0.0/24",
     "virtualNetworkName": "MyVNET",
