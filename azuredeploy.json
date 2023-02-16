@@ -395,9 +395,6 @@
           },
           "ilbBEAddressPoolID": {
             "value": "[variables('ilbBEAddressPoolID')]"
-          },
-          "securityGroupId": {
-            "value": "[variables('securityGroupId')]"
           }
         }
       }
