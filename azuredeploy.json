@@ -309,9 +309,6 @@
           },
           "subnets": {
             "value": "[variables('subnets')]"
-          },
-          "networkSecurityGroupName": {
-            "value": "[variables('networkSecurityGroupName')]"
           }
         }
       }
