@@ -208,7 +208,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('siosVMNamePrefix'), '1', '/configureSiosVM')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-04-01",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('siosVMNamePrefix'), '1')]"
@@ -296,7 +296,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('siosVMNamePrefix'), 'client', '/configureSiosVM')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-04-01",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('siosVMNamePrefix'), 'client')]"
