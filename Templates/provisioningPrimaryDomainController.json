@@ -132,7 +132,7 @@
               "domainName": "[parameters('domainName')]",
               "adminCreds": {
                 "userName": "[parameters('adminUserName')]",
-                "password": "testtest1234!"
+                "password": "PrivateSettingsRef:adminPassword"
               },
               "sharePath": "[parameters('sharePath')]"
             }
