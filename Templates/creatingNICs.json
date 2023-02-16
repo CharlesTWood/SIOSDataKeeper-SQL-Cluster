@@ -54,7 +54,10 @@
               }
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     },
     {
@@ -82,7 +85,10 @@
               ]
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     },
     {
@@ -110,7 +116,10 @@
               ]
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     },
     {
@@ -133,7 +142,10 @@
               }
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     }
   ],
