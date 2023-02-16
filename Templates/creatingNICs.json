@@ -25,6 +25,9 @@
     },
     "ilbBEAddressPoolID": {
       "type": "string"
+    },
+    "securityGroupId": {
+      "type": "string"
     }
   },
   "variables": {
@@ -51,7 +54,10 @@
               }
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     },
     {
@@ -79,7 +85,10 @@
               ]
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     },
     {
@@ -107,7 +116,10 @@
               ]
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     },
     {
@@ -130,7 +142,10 @@
               }
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+            "id": "[parameters('securityGroupId')]"
+        }
       }
     }
   ],

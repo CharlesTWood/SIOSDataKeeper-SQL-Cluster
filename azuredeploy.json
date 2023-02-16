@@ -155,19 +155,14 @@
     "adPDCNicName": "[concat(variables('vmSettings').adPDCVMName,'-nic')]",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "staticSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').staticSubnetName)]",
-    "ids": {
-      "adNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('adPDCNicName'))]"
-    },
-    "derivedIds": {
-      "adIPConfigID": "[concat(variables('ids').adNicId,'/ipConfigurations/ipconfig1')]"
-    },
+    "securityGroupId" : "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
     "subnets": [
       {
         "name": "[variables('subnetNames').staticSubnetName]",
         "properties": {
           "addressPrefix": "[variables('staticSubnet')]",
           "networkSecurityGroup": {
-            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+            "id": "[variables('securityGroupId')]"
           }
         }
       }
@@ -400,6 +395,9 @@
           },
           "ilbBEAddressPoolID": {
             "value": "[variables('ilbBEAddressPoolID')]"
+          },
+          "securityGroupId": {
+            "value": "[variables('securityGroupId')]"
           }
         }
       }
