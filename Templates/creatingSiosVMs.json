@@ -95,6 +95,7 @@
             "version": "latest"
           },
           "osDisk": {
+            "name": "osdisk",
             "createOption": "FromImage"
           },
           "dataDisks": [
@@ -183,6 +184,7 @@
             "version": "latest"
           },
           "osDisk": {
+            "name": "osdisk",
             "createOption": "FromImage"
           },
           "dataDisks": [
@@ -271,6 +273,7 @@
             "version": "latest"
           },
           "osDisk": {
+            "name": "osdisk",
             "createOption": "FromImage"
           },
           "dataDisks": []
