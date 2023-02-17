@@ -66,7 +66,7 @@
   },
   "resources": [
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2018-10-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), '0')]",
       "location": "[parameters('location')]",
@@ -95,13 +95,15 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'1.blob.core.windows.net/',parameters('vmContainerName'),'/',variables('siosVMNamePrefix'), '0', '-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
             "createOption": "FromImage"
-          }
+          },
+          "dataDisks": [
+            {
+              "createOption": "Empty",
+              "diskSizeGB": 100,
+              "lun": 0
+            }
+          ]
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -112,8 +114,7 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": "true",
-            "storageUri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'diag.blob.core.windows.net')]"
+            "enabled": "true"
           }
         }
       }
@@ -121,7 +122,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('siosVMNamePrefix'), '0', '/configureSiosVM')]",
-      "apiVersion": "2021-04-01",
+      "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('siosVMNamePrefix'), '0')]"
@@ -153,7 +154,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2018-10-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), '1')]",
       "location": "[parameters('location')]",
@@ -182,13 +183,15 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'1.blob.core.windows.net/',parameters('vmContainerName'),'/',variables('siosVMNamePrefix'), '1', '-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
             "createOption": "FromImage"
-          }
+          },
+          "dataDisks": [
+            {
+              "createOption": "Empty",
+              "diskSizeGB": 100,
+              "lun": 0
+            }
+          ]
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -199,8 +202,7 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": "true",
-            "storageUri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'diag.blob.core.windows.net')]"
+            "enabled": "true"
           }
         }
       }
@@ -208,7 +210,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('siosVMNamePrefix'), '1', '/configureSiosVM')]",
-      "apiVersion": "2021-04-01",
+      "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('siosVMNamePrefix'), '1')]"
@@ -240,7 +242,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2018-10-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('siosVMNamePrefix'), 'client')]",
       "location": "[parameters('location')]",
@@ -269,14 +271,9 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "osdisk",
-            "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'clnt.blob.core.windows.net/',parameters('vmContainerName'),'/client', '-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
             "createOption": "FromImage"
           },
-          "dataDisks": [ ]
+          "dataDisks": []
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -287,8 +284,7 @@
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": "true",
-            "storageUri": "[concat('http://',parameters('newStorageAccountNamePrefix'),'diag.blob.core.windows.net')]"
+            "enabled": "true"          
           }
         }
       }
@@ -296,7 +292,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('siosVMNamePrefix'), 'client', '/configureSiosVM')]",
-      "apiVersion": "2021-04-01",
+      "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('siosVMNamePrefix'), 'client')]"
